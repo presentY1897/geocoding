@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db:
+    image: postgres #TODO: 이미지 버전이랑 운영체제 버전 확인
+    volumes:
+      - ./docker/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=jusodb
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTRGES_INITDB_ARGS=--encoding=UTF-8
+    ports:
+      - 8080:8080
