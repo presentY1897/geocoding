@@ -1,3 +1,5 @@
+DROP TABLE 
+
 CREATE TABLE jibun (
     code varchar(25),
     serial_number varchar(3),
@@ -41,6 +43,9 @@ CREATE TABLE roadcode (
     notice_date VARCHAR(8),
     end_date VARCHAR(8)
 )
-
 COPY roadcode(road_number, road_name, road_name_roma, dong_code, sido_name, sido_roma_name, dong_name, dong_roma_name, dong_define, legal_dong_cod, bool_usage, change_reason_code, change_history, notice_date, end_date)
-    FROM '/data/201909_주소DB_전체분/개선_도로명코드_전체분.txt';
+    FROM '/data/total_address/refine_roadcode_all.txt' WITH DELIMITER '|';
+COPY roadjuso (code, road_number, dong_code, bool_basement, building_main_code, building_sub_code, basic_area_code, change_reason_code, notice_date, before_road_number, bool_detail_adress)
+    FROM PROGRAM 'cat ./total_address/road_juso/*.txt' WITH DELIMITER '|';
+COPY jibun (code, serial_number, legal_code, sido_name, sigungu_name, legal_dong_name, legal_li_name, bool_moutain, jibun, jibun_ho, bool_rep)
+    FROM PROGRAM 'cat ./total_address/jibun/*.txt' WITH DELMITER '|';
